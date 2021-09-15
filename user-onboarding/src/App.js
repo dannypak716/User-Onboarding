@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import UserForm from './UserForm.js';
 import React, {useState} from 'react';
-
+import axios from 'axios';
 
 const initialFormValues = {
   name: '',
@@ -25,15 +25,33 @@ function App() {
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  const formSubmit = () => {
-    const newUser = {
-      name: formValues.name.trim(),
-      email: formValues.email.trim(),
-      password: formValues.password.trim(),
-      terms: formValues.terms
-    }
-    postNewUser(newUser);
+  const getUsers = () => {
+    axios.get('https://reqres.in/api/users')
+      .then(resp => {
+        setUsers(resp.data);
+      }).catch(err => console.error(err))
   }
+
+  const postNewUser = newUser => {
+    axios.post('https://reqres.in/api/users', newUser)
+      .then(resp => {
+        setUsers([resp.data, ...users]);
+        setFormValues(initialFormValues);
+      }).catch(err => {
+        console.error(err)
+        setFormValues(initialFormValues);
+      })
+  }
+
+  // const formSubmit = () => {
+  //   const newUser = {
+  //     name: formValues.name.trim(),
+  //     email: formValues.email.trim(),
+  //     password: formValues.password.trim(),
+  //     terms: formValues.terms
+  //   }
+  //   postNewUser(newUser);
+  // }
 
   return (
     <div className="App">
