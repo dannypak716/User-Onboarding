@@ -4,13 +4,18 @@ import UserForm from './UserForm.js';
 import React, {useState} from 'react';
 
 
+const initialFormValues = {
+  name: '',
+  email: '',
+  password: '',
+  terms: false
+}
+
+const initialUsers = [];
 
 function App() {
-  // const [users, setUsers] = useState();
-
-
-
-
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [users, setUsers] = useState(initialUsers);
 
 
   return (
