@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import UserForm from './UserForm.js';
 import User from './User.js';
@@ -18,7 +17,8 @@ const initialFormErrors = {
   first_name: '',
   last_name: '',
   email: '',
-  password: ''
+  password: '',
+  terms: false
 }
 
 const initialUsers = [];
