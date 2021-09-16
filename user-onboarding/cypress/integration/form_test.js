@@ -22,10 +22,10 @@ describe("Users App", () => {
         emailInput().should('exist');
         passwordInput().should('exist');
         termsBox().should('exist');
-        submitBtn().should('exist');
+        submitBtn().should('be.disabled');
     })
 
-    describe('Filling out first and last name inputs', () => {
+    describe('Filling out all inputs and checkboxes', () => {
         it('can type in the inputs', () => {
             firstInput()
                 .should('have.value', '')
@@ -49,6 +49,27 @@ describe("Users App", () => {
 
             termsBox()
                 .click()
+        })
+    })
+
+    describe('Checking if submit button works depending on input requirements', () => {
+        it('the submit button is enabled when inputs/checkboxes are filled', () => {
+            firstInput().type('Jared')
+            lastInput().type('Hall')
+            emailInput().type('jaredhall@gmail.com')
+            passwordInput().type('ihatepasswords')
+            termsBox().click()
+            submitBtn().should('not.be.disabled')
+            submitBtn().click()
+        })
+
+        it('the submit button is disabled when one of the inputs is missing', () => {
+            firstInput().type('Jared')
+            lastInput().type('Hall')
+            emailInput().type('jaredhall@gmail.com')
+            // missing password input
+            termsBox().click()
+            submitBtn().should('be.disabled')
         })
     })
 
