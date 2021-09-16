@@ -23,7 +23,33 @@ describe("Users App", () => {
         passwordInput().should('exist');
         termsBox().should('exist');
         submitBtn().should('exist');
-        cy.contains('Submit').should('exist');
+    })
+
+    describe('Filling out first and last name inputs', () => {
+        it('can type in the inputs', () => {
+            firstInput()
+                .should('have.value', '')
+                .type('Danny')
+                .should('have.value', 'Danny')
+            
+            lastInput()
+                .should('have.value', '')
+                .type('Pak')
+                .should('have.value', 'Pak')
+
+            emailInput()
+                .should('have.value', '')
+                .type('dannypak@gmail.com')
+                .should('have.value', 'dannypak@gmail.com')
+
+            passwordInput()
+                .should('have.value', '')
+                .type('abc123')
+                .should('have.value', 'abc123')
+
+            termsBox()
+                .click()
+        })
     })
 
 
