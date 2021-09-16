@@ -71,8 +71,14 @@ describe("Users App", () => {
             termsBox().click()
             submitBtn().should('be.disabled')
         })
+
+        it('the submit button is disabled when the terms of service box is unchecked', () => {
+            firstInput().type('Jared')
+            lastInput().type('Hall')
+            emailInput().type('jaredhall@gmail.com')
+            passwordInput().type('ihatepasswords')
+            // missing terms of service checkbox
+            submitBtn().should('be.disabled')
+        })
     })
-
-
-
 })
